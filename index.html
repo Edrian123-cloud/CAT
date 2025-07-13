@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do You Like Me?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffe0e9;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      color: #d6336c;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #button-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      position: absolute;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    #yes-btn {
+      background-color: #38b000;
+      color: white;
+      left: 25%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #no-btn {
+      background-color: #d00000;
+      color: white;
+      left: 75%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #image-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    #reaction-text {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff1493;
+      display: none;
+      animation: bounce 0.5s infinite alternate;
+      margin-bottom: 10px;
+    }
+
+    @keyframes bounce {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    #result-img {
+      max-width: 90vw;
+      max-height: 60vh;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Do you like me?</h1>
+
+  <div id="button-container">
+    <button id="yes-btn">Yes</button>
+    <button id="no-btn">No</button>
+  </div>
+
+  <div id="image-container">
+    <div id="reaction-text">REALLLYYYYY????</div>
+    <img id="result-img" src="" alt="Reaction Image">
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yes-btn");
+    const noBtn = document.getElementById("no-btn");
+    const imageContainer = document.getElementById("image-container");
+    const resultImg = document.getElementById("result-img");
+    const reactionText = document.getElementById("reaction-text");
+
+    function moveNoBtn() {
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      const padding = 20;
+      const maxX = window.innerWidth - btnWidth - padding;
+      const maxY = window.innerHeight - btnHeight - padding - 100;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * (maxY - 100)) + 100;
+
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+    }
+
+    noBtn.addEventListener("click", () => {
+      moveNoBtn();
+
+      reactionText.style.display = "none";
+      resultImg.src = "scat.jpg";
+      imageContainer.style.display = "flex";
+
+      setTimeout(() => {
+        imageContainer.style.display = "none";
+      }, 1500);
+    });
+
+    yesBtn.addEventListener("click", () => {
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+
+      reactionText.style.display = "block";
+      imageContainer.style.display = "flex";
+
+      setTimeout(() => {
+        resultImg.src = "hcat.jpg";
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
